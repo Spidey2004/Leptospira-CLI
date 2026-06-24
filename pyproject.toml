@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lepmodel-cli"
+version = "0.1.0"
+description = "A lightweight and local alternative for Leptospira serogroups prediction framework in colab"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=1.5",
+    "numpy>=1.23",
+    "scikit-learn>=1.2",
+    "joblib>=1.2"
+]
+
+[project.scripts]
+lepmodel = "lepmodel.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["lepmodel*"]

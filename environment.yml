@@ -1,0 +1,32 @@
+# environment.yml — Conda environment for LeptoSerogrouper
+#
+# Creates a lightweight environment with ALL dependencies, including
+# NCBI BLAST+ from Bioconda.  No manual installation required.
+#
+# Usage:
+#   conda env create -f environment.yml
+#   conda activate lepmodel
+#   pip install -e .          # register the 'lepmodel' CLI command
+
+name: lepmodel
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  # Python
+  - python>=3.9
+
+  # NCBI BLAST+ (from Bioconda — includes makeblastdb, tblastn, etc.)
+  - blast>=2.12
+
+  # Scientific stack (from conda-forge for best compatibility)
+  - pandas>=1.5
+  - numpy>=1.23
+  - scikit-learn>=1.2
+  - joblib>=1.2
+
+  # Build tool for 'pip install -e .'
+  - pip
+  - setuptools>=61.0

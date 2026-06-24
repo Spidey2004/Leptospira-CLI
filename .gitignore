@@ -1,0 +1,50 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual environments ─────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+.env/
+
+# ── IDE / Editor ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS files ─────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Tool outputs (regenerated on every run) ──────────────────────────────────
+output/
+genomes_workspace/
+*.out
+temp_blast.out
+
+# ── BLAST database files (generated, not tracked) ────────────────────────────
+*_db.ndb
+*_db.nhr
+*_db.nin
+*_db.njs
+*_db.not
+*_db.nsq
+*_db.ntf
+*_db.nto
+
+# ── Jupyter / Colab ──────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+
+# ── Local ambient ──────────────────────────────────────────────────────────
+data/input/
+data/output/
+*.egg-info/
