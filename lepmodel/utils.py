@@ -30,7 +30,7 @@ from typing import List, Tuple
 _GENOME_EXTENSIONS = ("*.fasta", "*.fas", "*.fna")
 
 
-def discover_genomes(input_path: str) -> List[str]:
+def discover_genomes(input_path: str, *, recursive: bool = False) -> List[str]:
     """Discover genome FASTA files from *input_path*.
 
     If *input_path* is a single file it is returned directly.  If it is a
@@ -41,6 +41,9 @@ def discover_genomes(input_path: str) -> List[str]:
     ----------
     input_path : str
         A file path or a directory path supplied by the user.
+    recursive : bool, optional
+        If ``True``, search subdirectories recursively for genome files.
+        Default is ``False`` (only the top-level directory is scanned).
 
     Returns
     -------
@@ -64,13 +67,20 @@ def discover_genomes(input_path: str) -> List[str]:
 
     # It is a directory — scan for FASTA files
     genomes: List[str] = []
-    for ext in _GENOME_EXTENSIONS:
-        genomes.extend(glob.glob(os.path.join(input_path, ext)))
+    if recursive:
+        for ext in _GENOME_EXTENSIONS:
+            genomes.extend(
+                glob.glob(os.path.join(input_path, "**", ext), recursive=True)
+            )
+    else:
+        for ext in _GENOME_EXTENSIONS:
+            genomes.extend(glob.glob(os.path.join(input_path, ext)))
 
     if not genomes:
+        mode = "recursively in" if recursive else "in"
         raise ValueError(
             f"No genome FASTA files ({', '.join(_GENOME_EXTENSIONS)}) "
-            f"found in: {input_path}"
+            f"found {mode}: {input_path}"
         )
 
     return sorted(genomes)

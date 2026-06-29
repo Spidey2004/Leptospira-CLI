@@ -51,7 +51,7 @@ tblastn -version
 ```bash
 insert your genomes in data/input or in your prefered path
 
-run "lepmodel "
+run "lepmodel"
 
 analyse the output file in data/output
 ```

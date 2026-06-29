@@ -102,6 +102,15 @@ def build_parser() -> argparse.ArgumentParser:
             "directory as --input."
         ),
     )
+    parser.add_argument(
+        "-R", "--recursive",
+        action="store_true",
+        default=False,
+        help=(
+            "Search subdirectories recursively for genome FASTA files. "
+            "Useful when genomes are organised in per-sample folders."
+        ),
+    )
 
     return parser
 
@@ -145,16 +154,17 @@ def main(argv: list[str] | None = None) -> None:
     print("=" * 60)
     print("  lepmodel — Leptospira Serogroup Prediction CLI")
     print("=" * 60)
-    print(f"  Input    : {args.input}")
-    print(f"  Output   : {output_dir}")
-    print(f"  Models   : {model_dir}")
-    print(f"  Data     : {data_dir}")
-    print(f"  Queries  : {queries_dir}")
+    print(f"  Input     : {args.input}")
+    print(f"  Recursive : {'Yes' if args.recursive else 'No'}")
+    print(f"  Output    : {output_dir}")
+    print(f"  Models    : {model_dir}")
+    print(f"  Data      : {data_dir}")
+    print(f"  Queries   : {queries_dir}")
     print("=" * 60)
 
     # ── Step 1: Discover genomes ────────────────────────────────────────
     try:
-        genome_paths = discover_genomes(args.input)
+        genome_paths = discover_genomes(args.input, recursive=args.recursive)
     except (FileNotFoundError, ValueError) as exc:
         print(f"\n  [ERROR] {exc}")
         sys.exit(1)
